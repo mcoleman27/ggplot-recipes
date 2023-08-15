@@ -1,0 +1,37 @@
+---
+title: "Custom Scales"
+output: github_document
+---
+
+```{r include = FALSE}
+library(ggplot2)
+library(dplyr)
+data(airquality)
+tall_table = data.frame("Day" = c(1, 1, 2, 2, 3, 3), "Variable" = c("Ozone", "Temp", "Ozone", "Temp", "Ozone", "Temp"), "Value" = c(41, 67, 36, 72, 12, 74))
+```
+
+Typically ggplot likes "tall" data. That is, if you want to plot 2 time series on the same plot, you're supposed to have a column that denotes what time series is being plotted, and one that denotes the value to plot, like this:
+```{r echo = FALSE}
+tall_table
+```
+
+Then when plotting a time series you can do something simple like
+```ggplot(data) + geom_line(aes(x = Day, y = Value, colour = Variable))```
+
+but this is not always the format your data will come in, or practical. Often you'll have "wide" data, where each value has it's own column
+```{r echo = FALSE}
+head(airquality)
+```
+You can plot multiple lines on top of each other, by simply adding more `geom_line()`s but this will not automatically make a legend for your graph.
+To do that you should set up a manual scale, like this.
+
+```{r}
+ggplot(airquality %>% filter(Month == 5)) +
+  geom_line(mapping = aes(x = Day, y = Wind, colour = "1"), linewidth = 1) +
+  geom_line(mapping = aes(x = Day, y = Temp, colour = "2"), linewidth = 1) +
+  labs(x = "Day", y = "Value") +
+  scale_colour_manual(name = "Air Variable", values = c("#E16A86", "#00AD9A"), labels = c("Ozone", "Temperature"))
+```
+
+Don't forget to set the labels too, otherwise the y axis will probably have the wrong name.
+This also applies to any other type of graph where you might want to layer geoms on top of each other.
