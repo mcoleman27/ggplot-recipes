@@ -9,6 +9,9 @@ This sucks, so I made a repository to keep all these things in. Hopefully others
 ## [Histograms](https://github.com/mcoleman27/ggplot-recipes/blob/main/Plotting%20Examples/Histograms/histograms.md)
 Rescaling axis, shuffling bins sideways and advanced binwidth generation.
 
+## [Custom Scales](https://github.com/mcoleman27/ggplot-recipes/blob/main/Plotting%20Examples/Custom%20Scales/scales.md)
+How to make a custom scale for when you want to layer 2 geoms but have a legend.
+
 # Extra info
 If you want to contribute recipes to the knowledge base, feel free to raise an issue or make a pull request. Please endeavour to make your plots using default R datasets, such as iris!
 
